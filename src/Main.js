@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ProjectListing from './ProjectListing.js';
 import ProjectDetail from './ProjectDetail.js';
+import Resume from './Resume.js';
  
 class Main extends Component {
   render() {
@@ -14,6 +15,7 @@ class Main extends Component {
 				</div>
 			)}/>
 			<Route exact path='/projects' component={ProjectListing}/>
+			<Route exact path='/resume' component={Resume}/>
 			<Route path='/projects/:id' component={ProjectDetail}/>
 		</Switch>
 	  </div>
