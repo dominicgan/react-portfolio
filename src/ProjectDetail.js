@@ -7,7 +7,8 @@ class ProjectDetail extends Component {
 		};
 	}
   	componentDidMount() {
-	  let src = '/resume.json';
+	  let src = 'https://dominicgan.github.io/resume.json';
+	  // let src = '/resume.json';
 	  fetch(src)
 		.then((res) => {
 			return res.json();
