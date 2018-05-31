@@ -9,13 +9,13 @@ class App extends Component {
     return (
 	  <div className="App">
 		<header className="App-header">
-		  <img src={logo} className="App-logo" alt="logo" />
 		  <nav>
 		<ul>
 		<li><Link to='/'>Home</Link></li>
 		<li><Link to='/projects'>Listing</Link></li>
 		<li><Link to='/projects/123456'>Detail 1</Link></li>
 		<li><Link to='/projects/789012'>Detail 2</Link></li>
+		<li><Link to='/resume'>Bio</Link></li>
 		</ul>
 		  </nav>
 		</header>
