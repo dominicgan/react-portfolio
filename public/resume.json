@@ -1,0 +1,123 @@
+{
+  "basics": {
+    "name": "Dominic Gan",
+    "label": "Web Designer/Front-end Developer",
+    "picture": "http://www.dominicgan.com/dp-1x1.jpg",
+    "email": "dominicgangx@gmail.com",
+    "phone": "(+65)9177 4121",
+    "website": "http://dominicgan.github.io",
+    "summary": "A summary of John Doe...",
+    "location": {
+      "address": "Blk 211 Pasir Ris St 21 #12-248",
+      "postalCode": "510211",
+      "city": "Singapore",
+      "countryCode": "SG",
+      "region": "Singapore"
+    },
+    "profiles": [{
+      "network": "LinkedIn",
+      "username": "Dominic Gan",
+      "url": "https://sg.linkedin.com/in/dominic-gan-7079386b"
+    },{
+      "network": "Github",
+      "username": "dominicgan",
+      "url": "https://github.com/dominicgan"
+    },{
+      "network": "Codepen",
+      "username": "dominicgan",
+      "url": "http://codepen.io/dominicgan"
+    }]
+  },
+  "work": [{
+    "company": "ONG&ONG Group Pte Ltd",
+    "position": "Web Application Designer",
+    "website": "http://www.group.ong-ong.com",
+    "startDate": "2015-09-20",
+    "endDate": "Present",
+    "summary": "In charge of web design and front-end development for the company's internal solutions/web presence. Creating client side applications and website that meet and exceed customer requirements.",
+    "highlights": [
+      "Spearheaded the UI revamp company's intranet portal"
+    ]
+  },{
+    "company": "Balanced Consultancy Pte Ltd/Novitee Pte Ltd",
+    "position": "Web Consultant",
+    "website": "http://www.balancedconsultancy.com.sg",
+    "startDate": "2014-08-01",
+    "endDate": "2015-08-01",
+    "summary": "Responsible for designing and developing web solutions for clients. Experienced in managing projects for a wide range of clients and industries. Gained fluency in handling major web CMS solutions, such as Magento and WordPress.",
+    "highlights": []
+  },{
+    "company": "CrimsonLogic Pte Ltd",
+    "position": "Business Process Analyst (Intern)",
+    "website": "http://www.crimsonlogic.com",
+    "startDate": "2012-07-01",
+    "endDate": "2012-05-01",
+    "summary": "Business Process Analyst in the Solutions and Services Department of Project FRONTIER – Project aiming to integrate more than 250 business license applications from 18 government agencies onto a common portal. Gathered user requirements through formal meetings with the different government agencies and collated sets of Software Requirement Specifications (SRS). Involved in the amendment and improvement of business processes within the SRS documentation.",
+    "highlights": []
+  }],
+  "volunteer": [{}],
+  "education": [{
+    "institution": "National University of Singapore",
+    "area": "Electronic Commerce",
+    "studyType": "BComp (Information Systems) with Honours",
+    "startDate": "2010-08-01",
+    "endDate": "2014-06-01",
+    "gpa": "3.47",
+    "courses": [
+      "E-Business Capstone Project",
+      "Enterprise Service-Oriented Architecture"
+    ]
+  },{
+    "institution": "Chalmers University of Technology",
+    "area": "Information Systems",
+    "studyType": "Student Exchange Program",
+    "startDate": "2013-01-01",
+    "endDate": "2013-06-01",
+    "gpa": null,
+    "courses": [
+      "Human Computer Interaction",
+      "Interaction Design of Social Media"
+    ]
+  }],
+  "awards": [],
+  "publications": [],
+  "skills": [{
+    "name": "Front-end Development",
+    "level": "Highly Proficient",
+    "keywords": [
+      "HTML",
+      "CSS",
+      "Javascript"
+    ]
+  },{
+    "name": "User Interface Design",
+    "level": "Proficient",
+    "keywords": [
+      "Web Design",
+      "Prototyping",
+      "Wireframing",
+      "Adobe Creative Suite"
+    ]
+  }],
+  "languages": [{
+    "name": "English",
+    "level": "Native speaker"
+  },{
+    "name": "Chinese",
+    "level": "Basic"
+  }],
+  "interests": [{
+    "name": "Photography",
+    "keywords": [
+      "Cameras",
+      "Photos"
+    ]
+  },{
+    "name": "Collecting Mechanical Keyboards",
+    "keywords": [
+      "Seriously",
+      "Whaat?"
+    ]
+  }],
+  "references": [{}]
+}
