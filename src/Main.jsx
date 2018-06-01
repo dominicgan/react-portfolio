@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import ProjectListing from './ProjectListing.js';
-import ProjectDetail from './ProjectDetail.js';
+import ProjectListing from './ProjectListing.jsx';
+import ProjectDetail from './ProjectDetail.jsx';
 import Resume from './Resume.js';
  
 class Main extends Component {
