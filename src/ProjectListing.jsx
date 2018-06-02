@@ -105,7 +105,6 @@ class ProjectCategories extends Component {
 				{printCatList()}
 			</ul>
 			); 
-		
 	}
 }
 
@@ -130,28 +129,20 @@ class Projects extends Component {
 }
 
 class Project extends Component {
-  	componentDidMount() {
-  		this.setState({'project': this.props.project});
+	printCoverImage(imageObj) {
+		return (
+			<picture>
+				<source srcSet={this.props.baseUrl + imageObj.sm} media="(min-width: 768px)"/>
+				<source srcSet={this.props.baseUrl + imageObj.md} media="(min-width: 991pxpx)"/>
+				<source srcSet={this.props.baseUrl + imageObj.lg} media="(min-width: 1200px)"/>
+				<source srcSet={this.props.baseUrl + imageObj.src} media="(min-width: 1680px)"/>
+				<img src={this.props.baseUrl + imageObj.xs} alt={this.props.project.title}/>
+			</picture>
+			);
 	}
 	render() {
-		let printCoverImage = () => {
-			if (this.state && this.state.project.coverImage) {
-				let imgData = this.state.project.coverImage;
-				let imgList = Object.keys(imgData).map((key, i) => {
-					return (
-						<tr key={i}>
-							<th>{key}</th>
-							<td>
-								<a href={this.props.baseUrl + imgData[key]} rel='noreferrer noopener' target='_blank'>
-									{'coverimage-'+this.state.project.title.toLowerCase().replace(/ /g, '-')+'-'+key}
-								</a>
-							</td>
-						</tr>
-						);
-				});
-				return imgList;
-			} else return;
-		};
+		// render cover image as <picture>
+		let printCoverImage = this.printCoverImage(this.props.project.coverImage);
 		return (
 			<table>
 			<tbody>
@@ -178,8 +169,7 @@ class Project extends Component {
 				<tr>
 					<th>Cover image</th>
 					<td>
-						<img src={this.props.baseUrl + this.props.project.coverImage.xs} alt="coverImage-xs"/>
-						<table><tbody>{printCoverImage()}</tbody></table>
+						{printCoverImage}
 					</td>
 				</tr>
 				</tbody>
