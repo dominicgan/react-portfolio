@@ -64,10 +64,10 @@ class ResumeBio extends Component {
 				let printTh = () => {
 					if (!Number.isNaN(parseInt(el, 10))) {
 						return '';
-					} else {
-						return el;
-					};
+					} else return el;
 				}
+
+				let outputRow;
 
 				if (typeof this.props.bio[el] === 'string') {
 					let printVal = () => {
@@ -101,7 +101,7 @@ class ResumeBio extends Component {
 						return output;
 					};
 
-					return (
+					outputRow = (
 						<tr key={i} data-section={el}>
 							<th>{printTh()}</th>
 							<td>{printVal()}</td>
@@ -118,7 +118,7 @@ class ResumeBio extends Component {
 					
 					// don't print row if no data is present in subset
 					if (lenData) {
-						return (
+						outputRow = (
 							<tr key={i} data-section={el}>
 								<th>{printTh()}</th>
 								<td><ResumeBio className={this.props.className+'__'+el}  baseUrl={this.props.baseUrl} bio={this.props.bio[el]}/>
@@ -127,11 +127,17 @@ class ResumeBio extends Component {
 							)
 					}
 				}
+
+				return outputRow;
 			});
-			return bioTable;
+			return (
+				<table className={'resume__' + this.props.className}>
+					<tbody>{bioTable}</tbody>
+				</table>
+				);
 			}
 		};
-		return (<table className={'resume__' + this.props.className}><tbody>{printBio()}</tbody></table>);
+		return printBio();
 	}
 }
 
