@@ -24,20 +24,25 @@ class Resume extends Component {
 			if (this.state.resume) {
 				return (
 					<div className='resume__wrapper'>
-						<ResumeBio className='all' baseUrl={this.state.baseUrl} bio={this.state.resume} />
+						<h2>Basics</h2>
+						<ResumeBio className='basic' bio={this.state.resume.basics} />
+						<hr/>
+						<h2>Education</h2>
+						<ResumeBio className='education' bio={this.state.resume.education} />
+						<hr/>
+						<h2>Work</h2>
+						<ResumeBio className='work' bio={this.state.resume.work} />
+						<hr/>
+						<h2>Skills</h2>
+						<ResumeBio className='skills' bio={this.state.resume.skills} />
+						<hr/>
+						<h2>Language</h2>
+						<ResumeBio className='languages' bio={this.state.resume.languages} />
 						<code>{JSON.stringify(this.state.resume)}</code>
 					</div>
 				);
-						// <ResumeBio className='basic' bio={this.state.resume.basic} />
-						// <ResumeBio className='education' bio={this.state.resume.education} />
-						// <ResumeBio className='work' bio={this.state.resume.work} />
-						// <ResumeBio className='skills' bio={this.state.resume.skills} />
-						// <ResumeBio className='languages' bio={this.state.resume.languages} />
+						// <ResumeBio className='all' baseUrl={this.state.baseUrl} bio={this.state.resume} />
 
-						// <ResumeEdu education={this.state.resume.education} />
-						// <ResumeWork work={this.state.resume.work}/>
-						// <ResumeSkills skills={this.state.resume.skills}/>
-						// <ResumeLang languages={this.state.resume.languages}/>
 			} else {
 				return;
 			}
@@ -80,10 +85,6 @@ class ResumeBio extends Component {
 									)
 								break;
 							case 'url':
-								output = (
-									<a href={this.props.bio[el]} target='_blank' rel='noopener noreferrer'>{this.props.bio[el]}</a>
-									)
-								break;
 							case 'website':
 								output = (
 									<a href={this.props.bio[el]} target='_blank' rel='noopener noreferrer'>{this.props.bio[el]}</a>
