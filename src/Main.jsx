@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ProjectListing from './ProjectListing.jsx';
 import ProjectDetail from './ProjectDetail.jsx';
-import Resume from './Resume.js';
+import Resume from './Resume.jsx';
  
 class Main extends Component {
   render() {

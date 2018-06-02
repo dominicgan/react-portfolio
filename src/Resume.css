@@ -1,0 +1,22 @@
+.resume header {
+	text-align: center;
+}
+
+.resume__container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.resume__wrapper {
+	max-width: 991px;
+}
+
+.resume th {
+	text-align: left;
+	text-transform: capitalize;
+}
+
+.resume td {
+	padding-left: 10px;
+}
