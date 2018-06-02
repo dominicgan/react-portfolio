@@ -39,8 +39,20 @@
 	}
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 991px) {
 	.project__list li {
 		width: calc(100% / 3);
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.project__list li {
+		width: calc(100% / 4);
+	}
+}
+
+@media screen and (min-width: 1680px) {
+	.project__list li {
+		width: calc(100% / 5);
 	}
 }
