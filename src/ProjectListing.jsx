@@ -19,14 +19,29 @@ class ProjectListing extends Component {
 			return res.json();
 		})
 		.then((data) => {
-			console.log(data);
 			this.setState({
-				'ready': true,
-				'filters': data.filters,
+				'filters': [{name: 'All', class: 'all'}, ...data.filters],
 				'projects': data.projects,
 				'data': data
 			});
+
+			let presentFilters = this.getPresentFilters(this.state.data.projects);
+			this.setState({'presentFilters': presentFilters});
+			this.setState({'ready': true});
 		});
+  }
+  getPresentFilters(projects) {
+  	let categories = [];
+
+  	// add all category arrays into new array
+  	projects.map((el , i) => {
+  		return categories.push(...el.categories);
+  	});
+
+  	// reduce to unique set of categories and append all category in front
+  	categories = ['all', ...new Set(categories)];
+
+  	return categories;
   }
   onFilter(filterObj) {
 	// do nothing if active filter is same as clicked filter
@@ -53,7 +68,7 @@ class ProjectListing extends Component {
 			if (this.state.ready) {
 				return (
 					<div className='project__wrapper'>
-						<ProjectCategories filters={this.state.filters} onFilter={this.onFilter.bind(this)}/>
+						<ProjectCategories filters={this.state.filters} presentFilters={this.state.presentFilters} onFilter={this.onFilter.bind(this)}/>
 						<hr/>
 						<Projects projects={this.state.projects} baseUrl={this.state.baseUrl}/>
 					</div>
@@ -72,37 +87,17 @@ class ProjectListing extends Component {
 }
 
 class ProjectCategories extends Component {
-  	componentDidMount() {
-  		// add All filter to state
-  		let filterObj = [{
-  			name: 'All',
-  			class: 'all'
-  		}, ...this.props.filters];
-  		this.setState({'filters': filterObj});
-	}
 	render() {
 		let printCatList = () => {
-			if (this.state && this.state.filters) {
-				let catList = Array.prototype.map.call(this.state.filters, (el, i) => {
-					return (
-						<li key={i}>
-							<button onClick={this.props.onFilter.bind(this, el)} data-target={el}>{el.name}</button>
-						</li>);
-						// <table>
-						// 	<tbody>
-						// 		<tr>
-						// 			<th>Class</th>
-						// 			<td>{el.class}</td>
-						// 		</tr>
-						// 		<tr>
-						// 			<th>Name</th>
-						// 			<td>{el.name}</td>
-						// 		</tr>
-						// 	</tbody>
-						// </table>
+				let catList = Array.prototype.map.call(this.props.filters, (el, i) => {
+					if (this.props.presentFilters.indexOf(el.class) > -1) {
+						return (
+							<li key={i}>
+								<button onClick={this.props.onFilter.bind(this, el)} data-target={el}>{el.name}</button>
+							</li>);
+						}
 				});
 				return catList;
-			}
 		};
 
 		return (
