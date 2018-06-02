@@ -6,7 +6,11 @@ class ProjectListing extends Component {
 		super(props);
 		this.state = {
 			baseUrl: 'https://dominicgan.github.io',
-			requestUrl: 'https://dominicgan.github.io/portfolio.json'
+			requestUrl: 'https://dominicgan.github.io/portfolio.json',
+			activeFilter: {
+				name: 'All',
+				class: 'all'
+			}
 		};
 	}
   	componentDidMount() {
@@ -15,17 +19,43 @@ class ProjectListing extends Component {
 			return res.json();
 		})
 		.then((data) => {
-			this.setState({'portfolio': data});
+			console.log(data);
+			this.setState({
+				'ready': true,
+				'filters': data.filters,
+				'projects': data.projects,
+				'data': data
+			});
 		});
+  }
+  onFilter(filterObj) {
+	// do nothing if active filter is same as clicked filter
+  	if (JSON.stringify(this.state.activeFilter) === JSON.stringify(filterObj)) return;
+
+  	this.setState({'activeFilter': filterObj});
+
+  	if (filterObj.class !== 'all') {
+	  	// filter portfolio data
+	  	let filteredData = this.state.data.projects;
+	  	// console.log(this.state.data.filters);
+	  	filteredData = filteredData.filter(function(item){
+	      return item.categories.indexOf(filterObj.class) > -1;
+	    });
+
+	    this.setState({projects: filteredData});
+  	} else {
+  		// return all projects if selected filter is 'All'
+	    this.setState({projects: this.state.data.projects});
   	}
+  }
   render() {
 	let printProjectListing = () => {
-			if (this.state.portfolio) {
+			if (this.state.ready) {
 				return (
 					<div className='project__wrapper'>
-						<ProjectCategories categories={this.state.portfolio.filters}/>
+						<ProjectCategories filters={this.state.filters} onFilter={this.onFilter.bind(this)}/>
 						<hr/>
-						<Projects projects={this.state.portfolio.projects} baseUrl={this.state.baseUrl}/>
+						<Projects projects={this.state.projects} baseUrl={this.state.baseUrl}/>
 					</div>
 				);
 			} else {
@@ -43,27 +73,33 @@ class ProjectListing extends Component {
 
 class ProjectCategories extends Component {
   	componentDidMount() {
-  		this.setState({'categories': this.props.categories});
+  		// add All filter to state
+  		let filterObj = [{
+  			name: 'All',
+  			class: 'all'
+  		}, ...this.props.filters];
+  		this.setState({'filters': filterObj});
 	}
 	render() {
 		let printCatList = () => {
-			if (this.state && this.state.categories) {
-				let catList = Array.prototype.map.call(this.state.categories, (el, i) => {
+			if (this.state && this.state.filters) {
+				let catList = Array.prototype.map.call(this.state.filters, (el, i) => {
 					return (
 						<li key={i}>
-							<table>
-								<tbody>
-									<tr>
-										<th>Class</th>
-										<td>{el.class}</td>
-									</tr>
-									<tr>
-										<th>Name</th>
-										<td>{el.name}</td>
-									</tr>
-								</tbody>
-							</table>
+							<button onClick={this.props.onFilter.bind(this, el)} data-target={el}>{el.name}</button>
 						</li>);
+						// <table>
+						// 	<tbody>
+						// 		<tr>
+						// 			<th>Class</th>
+						// 			<td>{el.class}</td>
+						// 		</tr>
+						// 		<tr>
+						// 			<th>Name</th>
+						// 			<td>{el.name}</td>
+						// 		</tr>
+						// 	</tbody>
+						// </table>
 				});
 				return catList;
 			}
