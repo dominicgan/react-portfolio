@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Project.css';
 
 class ProjectListing extends Component {
 	constructor(props) {
@@ -21,11 +22,10 @@ class ProjectListing extends Component {
 	let printProjectListing = () => {
 			if (this.state.portfolio) {
 				return (
-					<div>
-						<code>{JSON.stringify(this.state.portfolio.filters)}</code>
+					<div className='project__wrapper'>
+						<ProjectCategories categories={this.state.portfolio.filters}/>
 						<hr/>
 						<Projects projects={this.state.portfolio.projects} baseUrl={this.state.baseUrl}/>
-						<code>{JSON.stringify(this.state.portfolio.projects)}</code>
 					</div>
 				);
 			} else {
@@ -33,7 +33,7 @@ class ProjectListing extends Component {
 			}
 	};
     return (
-	  <div className="project-listing">
+	  <div className="project">
 		<h1>Listing</h1>
 		{printProjectListing()}
 	  </div>
@@ -41,12 +41,49 @@ class ProjectListing extends Component {
   }
 }
 
+class ProjectCategories extends Component {
+  	componentDidMount() {
+  		this.setState({'categories': this.props.categories});
+	}
+	render() {
+		let printCatList = () => {
+			if (this.state && this.state.categories) {
+				let catList = Array.prototype.map.call(this.state.categories, (el, i) => {
+					return (
+						<li key={i}>
+							<table>
+								<tbody>
+									<tr>
+										<th>Class</th>
+										<td>{el.class}</td>
+									</tr>
+									<tr>
+										<th>Name</th>
+										<td>{el.name}</td>
+									</tr>
+								</tbody>
+							</table>
+						</li>);
+				});
+				return catList;
+			}
+		};
+
+		return (
+			<ul className='project__filters'>
+				{printCatList()}
+			</ul>
+			); 
+		
+	}
+}
+
 class Projects extends Component {
   	componentDidMount() {
 	}
 	render() {
 		return (
-			<ul>
+			<ul className='project__list'>
 			{
 				this.props.projects.map((project, key) => {
 					return (
@@ -63,8 +100,27 @@ class Projects extends Component {
 
 class Project extends Component {
   	componentDidMount() {
+  		this.setState({'project': this.props.project});
 	}
 	render() {
+		let printCoverImage = () => {
+			if (this.state && this.state.project.coverImage) {
+				let imgData = this.state.project.coverImage;
+				let imgList = Object.keys(imgData).map((key, i) => {
+					return (
+						<tr key={i}>
+							<th>{key}</th>
+							<td>
+								<a href={this.props.baseUrl + imgData[key]} rel='noreferrer noopener' target='_blank'>
+									{'coverimage-'+this.state.project.title.toLowerCase().replace(/ /g, '-')+'-'+key}
+								</a>
+							</td>
+						</tr>
+						);
+				});
+				return imgList;
+			} else return;
+		};
 		return (
 			<table>
 			<tbody>
@@ -77,12 +133,23 @@ class Project extends Component {
 					<td>{this.props.project.date}</td>
 				</tr>
 				<tr>
-					<th>categories</th>
+					<th>Categories</th>
 					<td>{this.props.project.categories.join(', ')}</td>
 				</tr>
 				<tr>
-					<th>url</th>
+					<th>Featured</th>
+					<td>{this.props.project.featured ? 'yes' : 'no'}</td>
+				</tr>
+				<tr>
+					<th>Url</th>
 					<td><a target='_blank' rel='noopener noreferrer' href={this.props.baseUrl + this.props.project.url}>Link</a></td>
+				</tr>
+				<tr>
+					<th>Cover image</th>
+					<td>
+						<img src={this.props.baseUrl + this.props.project.coverImage.xs} alt="coverImage-xs"/>
+						<table><tbody>{printCoverImage()}</tbody></table>
+					</td>
 				</tr>
 				</tbody>
 			</table>
