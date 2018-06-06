@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ProjectListing.css';
 import { Link } from 'react-router-dom';
+import { ProjectPicture } from './ProjectDetail.jsx';
 import 'url-search-params-polyfill';
 
 class ProjectListing extends Component {
@@ -72,25 +73,18 @@ class ProjectListing extends Component {
   	}
   }
   render() {
-	let printProjectListing = () => {
-			if (this.state.ready) {
-				return (
-					<div className='project__wrapper'>
-						<ProjectCategories filters={this.state.filters} presentFilters={this.state.presentFilters} onFilter={this.onFilter.bind(this)}/>
-						<hr/>
-						<Projects projects={this.state.projects} baseUrl={this.state.baseUrl}/>
-					</div>
-				);
-			} else {
-				return;
-			}
-	};
-    return (
-	  <div className="project">
-		<h1>Listing</h1>
-		{printProjectListing()}
-	  </div>
-    );
+	if (this.state.ready) {
+	    return (
+		  <div className="project">
+			<h1>Listing</h1>
+			<div className='project__wrapper'>
+				<ProjectCategories filters={this.state.filters} presentFilters={this.state.presentFilters} onFilter={this.onFilter.bind(this)}/>
+				<hr/>
+				<Projects projects={this.state.projects} baseUrl={this.state.baseUrl}/>
+			</div>
+		  </div>
+	    );
+	} else return (<div className="project"></div>)
   }
 }
 
@@ -101,7 +95,7 @@ class ProjectCategories extends Component {
 					if (this.props.presentFilters.indexOf(el.class) > -1) {
 						return (
 							<li key={i}>
-								<button onClick={this.props.onFilter.bind(this, el)} data-target={el}>{el.name}</button>
+								<button onClick={this.props.onFilter.bind(this, el)} data-target={el.class}>{el.name}</button>
 							</li>);
 						}
 				});
@@ -112,13 +106,11 @@ class ProjectCategories extends Component {
 			<ul className='project__filters'>
 				{printCatList()}
 			</ul>
-			); 
+			);
 	}
 }
 
 class Projects extends Component {
-  	componentDidMount() {
-	}
 	render() {
 		return (
 			<ul className='project__list'>
@@ -137,20 +129,7 @@ class Projects extends Component {
 }
 
 class Project extends Component {
-	printCoverImage(imageObj) {
-		return (
-			<picture>
-				<source srcSet={this.props.baseUrl + imageObj.sm} media="(min-width: 768px)"/>
-				<source srcSet={this.props.baseUrl + imageObj.md} media="(min-width: 991pxpx)"/>
-				<source srcSet={this.props.baseUrl + imageObj.lg} media="(min-width: 1200px)"/>
-				<source srcSet={this.props.baseUrl + imageObj.src} media="(min-width: 1680px)"/>
-				<img src={this.props.baseUrl + imageObj.xs} alt={this.props.project.title}/>
-			</picture>
-			);
-	}
 	render() {
-		// render cover image as <picture>
-		let printCoverImage = this.printCoverImage(this.props.project.coverImage);
 		return (
 			<table>
 			<tbody>
@@ -177,7 +156,7 @@ class Project extends Component {
 				<tr>
 					<th>Cover image</th>
 					<td>
-						{printCoverImage}
+						<ProjectPicture baseUrl={this.props.baseUrl} image={this.props.project.coverImage} title={this.props.project.title}/>
 					</td>
 				</tr>
 				</tbody>

@@ -50,12 +50,13 @@ class ProjectDetail extends Component {
   				return;
   			})
   	}
+
 	renderCategories() {
 		if (this.state.project.categories) {
 			let outputObj = this.state.project.categories.map((el,i) => {
 				return (
 					<li key={i}>
-					<span>{el}</span>
+						<span>{el}</span>
 					</li>
 					)
 			});
@@ -64,37 +65,17 @@ class ProjectDetail extends Component {
 		}
 	}
 
-	renderImages() {
+	renderImagesArray() {
 		if (this.state.project.images) {
 			let outputObj = this.state.project.images.map((el,i) => {
 				return (
 					<li key={i}>
-						<picture>
-							<source srcSet={this.state.baseUrl + el.sm} media="(min-width: 768px)"/>
-							<source srcSet={this.state.baseUrl + el.md} media="(min-width: 991pxpx)"/>
-							<source srcSet={this.state.baseUrl + el.lg} media="(min-width: 1200px)"/>
-							<source srcSet={this.state.baseUrl + el.src} media="(min-width: 1680px)"/>
-							<img width='150' src={this.state.baseUrl + el.xs} alt={this.state.project.title}/>
-						</picture>
+			    		<ProjectPicture baseUrl={this.state.baseUrl} image={el} title={this.state.project.title}/>
 					</li>
 					)
 			});
 
 			return outputObj;
-		}
-	}
-
-	renderCoverImage(obj) {
-		if (obj) {
-			return (
-				<picture>
-					<source srcSet={this.state.baseUrl + obj.sm} media="(min-width: 768px)"/>
-					<source srcSet={this.state.baseUrl + obj.md} media="(min-width: 991pxpx)"/>
-					<source srcSet={this.state.baseUrl + obj.lg} media="(min-width: 1200px)"/>
-					<source srcSet={this.state.baseUrl + obj.src} media="(min-width: 1680px)"/>
-					<img width='150' src={this.state.baseUrl + obj.xs} alt={this.state.project.title}/>
-				</picture>
-				)
 		}
 	}
 
@@ -103,6 +84,7 @@ class ProjectDetail extends Component {
 			return {__html: this.state.project.content};
 		}
 	}
+
 	render() {
 
 	    if (this.state.isLoading) {
@@ -117,30 +99,58 @@ class ProjectDetail extends Component {
 			    		<header>
 				    		<h2>{this.state.project.title}</h2>
 				    		<ul>
-				    		<li>{this.state.project.attribution}</li>
-				    		<li>{this.state.project.client}</li>
+					    		<li>{this.state.project.attribution}</li>
+					    		<li>{this.state.project.client}</li>
 				    		</ul>
 			    		</header>
-			    		<ul>
-				    		<li>{this.renderCoverImage(this.state.project.coverImage)}</li>
-				    		<li>{this.renderCoverImage(this.state.project.coverImageIndex)}</li>
+			    		<ul className='images images--cover'>
+				    		<li><ProjectPicture baseUrl={this.state.baseUrl} image={this.state.project.coverImage} title={this.state.project.title}/></li>
+				    		{/*<li><ProjectPicture baseUrl={this.state.baseUrl} image={this.state.project.coverImageIndex} title={this.state.project.title}/></li>*/}
 			    		</ul>
 			    		<ul>
 				    		<li><time dateTime={this.state.project.date}>{this.state.project.date}</time></li>
 				    		<li><a href={this.state.project.link} target='_blank' rel='noopener noreferrer'>Visit Site</a></li>
 			    		</ul>
 			    		<ul>{this.renderCategories()}</ul>
-			    		<ul>{this.renderImages()}</ul>
 			    		<main dangerouslySetInnerHTML={this.renderProjectContent()}></main>
 			    		<hr/>
+			    		<ul className='images'>{this.renderImagesArray()}</ul>
 		    		</article>
+					{/*<code>{JSON.stringify(this.state.project)}</code>*/}
 		    		<Link to='/projects'>Back to projects</Link>
 	    		</div>
 		    );
-				// <code>{JSON.stringify(this.state.project)}</code>
 	  }
   }
 }
 
-export default ProjectDetail
+/**
+ * Create a <picture> element that maps image data into sources
+ */
+export class ProjectPicture extends Component {
+	render() {
+		return (
+				<picture>
+					<source srcSet={this.props.baseUrl + this.props.image.sm} media="(min-width: 320px)"/>
+					<source srcSet={this.props.baseUrl + this.props.image.md} media="(min-width: 576px)"/>
+					<source srcSet={this.props.baseUrl + this.props.image.lg} media="(min-width: 768px)"/>
+					<source srcSet={this.props.baseUrl + this.props.image.src} media="(min-width: 1024px)"/>
+					<img src={this.props.baseUrl + this.props.image.xs} alt={this.props.title}/>
+				</picture>
+			)
+	}
+}
 
+// class ProjectDetail extends Component {
+// 	render() {}
+// }
+
+// class ProjectDetail extends Component {
+// 	render() {}
+// }
+
+// class ProjectDetail extends Component {
+// 	render() {}
+// }
+
+export default ProjectDetail;
