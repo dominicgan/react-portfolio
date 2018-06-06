@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ProjectListing.css';
 import { Link } from 'react-router-dom';
+import 'url-search-params-polyfill';
 
 class ProjectListing extends Component {
 	constructor(props) {
@@ -15,19 +16,27 @@ class ProjectListing extends Component {
 		};
 	}
   	componentDidMount() {
-	  fetch(this.state.requestUrl)
-		.then((res) => res.json())
-		.then((data) => {
-			this.setState({
-				'filters': [{name: 'All', class: 'all'}, ...data.filters],
-				'projects': data.projects,
-				'data': data
+  		fetch(this.state.requestUrl)
+			.then((res) => res.json())
+			.then((data) => {
+				this.setState({
+					'filters': [{name: 'All', class: 'all'}, ...data.filters],
+					'projects': data.projects,
+					'data': data
+				});
+
+				let presentFilters = this.getPresentFilters(this.state.data.projects);
+				this.setState({'presentFilters': presentFilters});
+				this.setState({'ready': true});
+
+		  		let search = new URLSearchParams(this.props.location.search);
+				let filterObj = this.state.filters.find((el) => el.class === search.get('filter'));
+				// filter data if url params detects a proper filter
+				if (filterObj) {
+					this.onFilter(filterObj);
+				}
 			});
 
-			let presentFilters = this.getPresentFilters(this.state.data.projects);
-			this.setState({'presentFilters': presentFilters});
-			this.setState({'ready': true});
-		});
   }
   getPresentFilters(projects) {
   	let categories = [];
