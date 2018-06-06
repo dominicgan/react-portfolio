@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './ProjectListing.css';
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { ProjectPicture } from './ProjectDetail.jsx';
 import 'url-search-params-polyfill';
+import '../css/ProjectListing.css';
 
 class ProjectListing extends Component {
 	constructor(props) {

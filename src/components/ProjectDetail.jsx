@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ProjectDetail.css';
+import '../css/ProjectDetail.css';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import 'url-search-params-polyfill';

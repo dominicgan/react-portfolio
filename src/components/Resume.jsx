@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from "react-helmet";
-import './Resume.css';
+import '../css/Resume.css';
 
 class Resume extends Component {
 	constructor(props) {
