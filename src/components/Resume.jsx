@@ -98,7 +98,7 @@ class ResumeBio extends Component {
 								break;
 							case 'picture':
 								output = (
-									<img src={'+'+this.props.bio[el]} alt={el}/>
+									<img width='100' src={this.props.bio[el]} alt={el}/>
 									)
 								break;
 							default:
