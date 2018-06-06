@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
 import './Resume.css';
 
 class Resume extends Component {
@@ -46,14 +47,17 @@ class Resume extends Component {
 			}
 		}
     return (
-	  <article className="resume">
-	  <header>
-		  <h1>Bio</h1>
-	  </header>
-	  <div className="resume__container">
-		  {printResume()}
-	  </div>
-	  </article>
+		<article className="resume">
+			<Helmet>
+				<title>Dominic Gan | Resume</title>
+			</Helmet>
+			<header>
+				<h1>Bio</h1>
+			</header>
+			<div className="resume__container">
+				{printResume()}
+			</div>
+		</article>
     );
   }
 }

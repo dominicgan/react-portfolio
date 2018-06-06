@@ -7,18 +7,18 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-	  <div className="App">
-		<header className="App-header">
-		  <nav>
-		<ul>
-		<li><Link to='/'>Home</Link></li>
-		<li><Link to='/projects'>Listing</Link></li>
-		<li><Link to='/resume'>Bio</Link></li>
-		</ul>
-		  </nav>
-		</header>
-		<Main />
-	  </div>
+		<div className="App">
+			<header className="App-header">
+			  <nav>
+			<ul>
+			<li><Link to='/'>Home</Link></li>
+			<li><Link to='/projects'>Listing</Link></li>
+			<li><Link to='/resume'>Bio</Link></li>
+			</ul>
+			  </nav>
+			</header>
+			<Main />
+		</div>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './ProjectDetail.css';
+import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import 'url-search-params-polyfill';
 
@@ -12,6 +13,7 @@ class ProjectDetail extends Component {
 			isLoading: true
 		};
 	}
+
   	componentDidMount() {
   		console.log(this.props.location.search);
   		let search = new URLSearchParams(this.props.location.search);
@@ -22,6 +24,7 @@ class ProjectDetail extends Component {
   		console.log(this.props.match.params);
   		this.fetchProjectData(this.props.match.params.id);
   	}
+
   	componentDidUpdate(prevProps) {
   		// handle route change (view different project)
   		if (this.props.location.pathname !== prevProps.location.pathname) {
@@ -32,6 +35,7 @@ class ProjectDetail extends Component {
 
   		}
   	}
+
   	fetchProjectData(srcUrl) {
   		// get project json from source
   		// (id value in url)
@@ -94,6 +98,9 @@ class ProjectDetail extends Component {
 	    } else {
 	    	return (
 	    		<div className="project-detail">
+					<Helmet>
+						<title>Dominic Gan | {this.state.project.title}</title>
+					</Helmet>
 		    		<h1>Detail</h1>
 		    		<article>
 			    		<header>

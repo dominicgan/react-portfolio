@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ProjectListing.css';
 import { Link } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 import { ProjectPicture } from './ProjectDetail.jsx';
 import 'url-search-params-polyfill';
 
@@ -76,6 +77,9 @@ class ProjectListing extends Component {
 	if (this.state.ready) {
 	    return (
 		  <div className="project">
+			<Helmet>
+				<title>Dominic Gan | Projects</title>
+			</Helmet>
 			<h1>Listing</h1>
 			<div className='project__wrapper'>
 				<ProjectCategories filters={this.state.filters} presentFilters={this.state.presentFilters} onFilter={this.onFilter.bind(this)}/>
