@@ -9,14 +9,40 @@
 }
 
 .resume__wrapper {
+	width: 100%;
 	max-width: 991px;
 }
 
+.resume code {
+	width: 100%;
+	word-break: break-word;
+}
+
+.resume table {
+	border-spacing: 0;
+	width: 100%;
+	table-layout: fixed;
+}
+
 .resume th {
+	width: 100px;
+	padding-left: 0;
+	padding-right: 0;
 	text-align: left;
 	text-transform: capitalize;
 }
 
+.resume th.empty {
+	width: 0;
+}
+
 .resume td {
+	width: calc(100% - 100px);
 	padding-left: 10px;
+	word-break: break-word;
+}
+
+.resume th.empty + td {
+	width: 100%;
+	padding-left: 0;
 }

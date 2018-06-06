@@ -66,8 +66,12 @@ class ResumeBio extends Component {
 				// if key (el) is number, dont print value
 				let printTh = () => {
 					if (!Number.isNaN(parseInt(el, 10))) {
-						return '';
-					} else return el;
+						return (
+							<th className='empty'></th>
+							);
+					} else return (
+							<th>{el}</th>
+						);
 				}
 
 				let outputRow;
@@ -102,7 +106,7 @@ class ResumeBio extends Component {
 
 					outputRow = (
 						<tr key={i} data-section={el}>
-							<th>{printTh()}</th>
+							{printTh()}
 							<td>{printVal()}</td>
 						</tr>
 						)
@@ -119,7 +123,7 @@ class ResumeBio extends Component {
 					if (lenData) {
 						outputRow = (
 							<tr key={i} data-section={el}>
-								<th>{printTh()}</th>
+								{printTh()}
 								<td><ResumeBio className={this.props.className+'__'+el}  baseUrl={this.props.baseUrl} bio={this.props.bio[el]}/>
 								</td>
 							</tr>
