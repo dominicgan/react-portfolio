@@ -15,9 +15,7 @@ class ProjectListing extends Component {
 	}
   	componentDidMount() {
 	  fetch(this.state.requestUrl)
-		.then((res) => {
-			return res.json();
-		})
+		.then((res) => res.json())
 		.then((data) => {
 			this.setState({
 				'filters': [{name: 'All', class: 'all'}, ...data.filters],

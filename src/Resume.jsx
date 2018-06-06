@@ -12,9 +12,7 @@ class Resume extends Component {
   	componentDidMount() {
 	  let src = this.state.baseUrl + this.state.endpoint;
 	  fetch(src)
-		.then((res) => {
-			return res.json();
-		})
+		.then((res) => res.json())
 		.then((data) => {
 			this.setState({'resume': data});
 		});
