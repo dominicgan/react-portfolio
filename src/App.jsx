@@ -13,8 +13,6 @@ class App extends Component {
 		<ul>
 		<li><Link to='/'>Home</Link></li>
 		<li><Link to='/projects'>Listing</Link></li>
-		<li><Link to='/projects/swimfast'>Proj_1</Link></li>
-		<li><Link to='/projects/ong-ong-group'>Proj_2</Link></li>
 		<li><Link to='/resume'>Bio</Link></li>
 		</ul>
 		  </nav>

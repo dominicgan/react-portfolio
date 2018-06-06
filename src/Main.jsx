@@ -12,6 +12,7 @@ class Main extends Component {
 			<Route exact path='/' render={(props) => (
 				<div className='home'>
 				<h1>Home</h1>
+				<p>Hello World</p>
 				</div>
 			)}/>
 			<Route exact path='/projects' component={ProjectListing}/>
