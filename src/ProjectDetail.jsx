@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import './ProjectDetail.css';
 import { Link } from 'react-router-dom';
+import 'url-search-params-polyfill';
 
 class ProjectDetail extends Component {
 	constructor(props) {
@@ -11,6 +13,12 @@ class ProjectDetail extends Component {
 		};
 	}
   	componentDidMount() {
+  		console.log(this.props.location.search);
+  		let search = new URLSearchParams(this.props.location.search);
+  		console.log(search);
+  		for (var key of search.keys()) {
+  			console.log(key, search.get(key));
+  		}
   		console.log(this.props.match.params);
   		this.fetchProjectData(this.props.match.params.id);
   	}

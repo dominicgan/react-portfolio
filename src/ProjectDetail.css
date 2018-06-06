@@ -1,0 +1,15 @@
+.project-detail .images {
+	width: 100%;
+	padding: 0;
+	list-style: none;
+}
+
+.project-detail img {
+	width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+	.project-detail img {
+		max-width: 240px;
+	}
+}

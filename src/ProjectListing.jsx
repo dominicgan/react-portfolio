@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Project.css';
+import './ProjectListing.css';
 import { Link } from 'react-router-dom';
 
 class ProjectListing extends Component {
