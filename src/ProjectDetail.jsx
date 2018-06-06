@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ProjectDetail extends Component {
 	constructor(props) {
@@ -113,10 +114,11 @@ class ProjectDetail extends Component {
 				<ul>{printImages()}</ul>
 				<main dangerouslySetInnerHTML={printProjectContent()}></main>
 				<hr/>
-				<code>{JSON.stringify(this.state.project)}</code>
 			</article>
+			<Link to='/projects'>Back to projects</Link>
 		  </div>
 	    );
+				// <code>{JSON.stringify(this.state.project)}</code>
   }
 }
 

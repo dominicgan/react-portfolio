@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Project.css';
+import { Link } from 'react-router-dom';
 
 class ProjectListing extends Component {
 	constructor(props) {
@@ -162,7 +163,7 @@ class Project extends Component {
 				</tr>
 				<tr>
 					<th>Url</th>
-					<td><a target='_blank' rel='noopener noreferrer' href={this.props.baseUrl + this.props.project.url}>Link</a></td>
+					<td><Link to={this.props.project.url.split('.json')[0]}>Link</Link></td>
 				</tr>
 				<tr>
 					<th>Cover image</th>
