@@ -6,7 +6,8 @@ class ProjectDetail extends Component {
 		super(props);
 		this.state = {
 			baseUrl: 'https://dominicgan.github.io/',
-			project: {}
+			project: {},
+			isLoading: true
 		};
 	}
   	componentDidMount() {
@@ -16,7 +17,11 @@ class ProjectDetail extends Component {
   	componentDidUpdate(prevProps) {
   		// handle route change (view different project)
   		if (this.props.location.pathname !== prevProps.location.pathname) {
+			this.setState({'isLoading': true});
 	  		this.fetchProjectData(this.props.match.params.id);
+			// setTimeout(() => {
+			// }, 1000);
+
   		}
   	}
   	fetchProjectData(srcUrl) {
@@ -30,7 +35,10 @@ class ProjectDetail extends Component {
   			.then((res) => res.json())
   			.then((data) => {
   				console.log(data);
-  				this.setState({'project': data});
+  				this.setState({
+  					'project': data,
+	  				'isLoading': false
+	  			});
   				return;
   			})
   	}
@@ -89,35 +97,37 @@ class ProjectDetail extends Component {
 			}
 		}
 
-	    return (
-		  <div className="project-detail">
-			<h1>Detail</h1>
-			<h2>{this.props.match.params.id}</h2>
-			<article>
-				<header>
-					<h2>{this.state.project.title}</h2>
+	    return this.state.isLoading ?
+	    	(<div><h1>Loading</h1></div>) :
+	    	(
+			  <div className="project-detail">
+				<h1>Detail</h1>
+				<h2>{this.props.match.params.id}</h2>
+				<article>
+					<header>
+						<h2>{this.state.project.title}</h2>
+						<br/>
+						<span>{this.state.project.attribution}</span>
+						<br/>
+						<span>{this.state.project.client}</span>
+					</header>
 					<br/>
-					<span>{this.state.project.attribution}</span>
+					<span>{printCoverImage(this.state.project.coverImage)}</span>
 					<br/>
-					<span>{this.state.project.client}</span>
-				</header>
-				<br/>
-				<span>{printCoverImage(this.state.project.coverImage)}</span>
-				<br/>
-				<span>{printCoverImage(this.state.project.coverImageIndex)}</span>
-				<br/>
-				<time dateTime={this.state.project.date}>{this.state.project.date}</time>
-				<br/>
-				<a href={this.state.project.link} target='_blank' rel='noopener noreferrer'>Visit Site</a>
-				<ul>{printCategories()}</ul>
-				<br/>
-				<ul>{printImages()}</ul>
-				<main dangerouslySetInnerHTML={printProjectContent()}></main>
-				<hr/>
-			</article>
-			<Link to='/projects'>Back to projects</Link>
-		  </div>
-	    );
+					<span>{printCoverImage(this.state.project.coverImageIndex)}</span>
+					<br/>
+					<time dateTime={this.state.project.date}>{this.state.project.date}</time>
+					<br/>
+					<a href={this.state.project.link} target='_blank' rel='noopener noreferrer'>Visit Site</a>
+					<ul>{printCategories()}</ul>
+					<br/>
+					<ul>{printImages()}</ul>
+					<main dangerouslySetInnerHTML={printProjectContent()}></main>
+					<hr/>
+				</article>
+				<Link to='/projects'>Back to projects</Link>
+			  </div>
+		    );
 				// <code>{JSON.stringify(this.state.project)}</code>
   }
 }
